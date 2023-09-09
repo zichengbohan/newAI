@@ -14,6 +14,7 @@
 		0754B9022AAC744800C8787D /* AISleepStoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0754B9012AAC744800C8787D /* AISleepStoryTests.swift */; };
 		0754B90C2AAC744800C8787D /* AISleepStoryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0754B90B2AAC744800C8787D /* AISleepStoryUITests.swift */; };
 		0754B90E2AAC744800C8787D /* AISleepStoryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0754B90D2AAC744800C8787D /* AISleepStoryUITestsLaunchTests.swift */; };
+		0754B9582AAC964800C8787D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0754B9572AAC964800C8787D /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		0754B9072AAC744800C8787D /* AISleepStoryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AISleepStoryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0754B90B2AAC744800C8787D /* AISleepStoryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AISleepStoryUITests.swift; sourceTree = "<group>"; };
 		0754B90D2AAC744800C8787D /* AISleepStoryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AISleepStoryUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0754B9572AAC964800C8787D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0754B9582AAC964800C8787D /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +81,7 @@
 				0754B9002AAC744800C8787D /* AISleepStoryTests */,
 				0754B90A2AAC744800C8787D /* AISleepStoryUITests */,
 				0754B8EE2AAC744400C8787D /* Products */,
+				0754B9562AAC964700C8787D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +129,14 @@
 				0754B90D2AAC744800C8787D /* AISleepStoryUITestsLaunchTests.swift */,
 			);
 			path = AISleepStoryUITests;
+			sourceTree = "<group>";
+		};
+		0754B9562AAC964700C8787D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0754B9572AAC964800C8787D /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -417,7 +429,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AISleepStory/Preview Content\"";
-				DEVELOPMENT_TEAM = EP73U6E2WX;
+				DEVELOPMENT_TEAM = 3768N57L6C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -446,7 +458,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AISleepStory/Preview Content\"";
-				DEVELOPMENT_TEAM = EP73U6E2WX;
+				DEVELOPMENT_TEAM = 3768N57L6C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
