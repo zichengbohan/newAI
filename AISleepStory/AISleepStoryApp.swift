@@ -11,7 +11,7 @@ import SwiftUI
 struct AISleepStoryApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            XBMSpeechStoryView()
         }
     }
 }

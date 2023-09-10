@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0702BA902AACC9A800525BE2 /* XAINetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702BA8F2AACC9A800525BE2 /* XAINetRequest.swift */; };
+		0702BA932AAE0C0F00525BE2 /* XBMSpeechViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702BA922AAE0C0F00525BE2 /* XBMSpeechViewModel.swift */; };
 		0754B8F12AAC744400C8787D /* AISleepStoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0754B8F02AAC744400C8787D /* AISleepStoryApp.swift */; };
-		0754B8F32AAC744400C8787D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0754B8F22AAC744400C8787D /* ContentView.swift */; };
+		0754B8F32AAC744400C8787D /* XBMSpeechStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0754B8F22AAC744400C8787D /* XBMSpeechStoryView.swift */; };
 		0754B8F52AAC744700C8787D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0754B8F42AAC744700C8787D /* Assets.xcassets */; };
 		0754B8F82AAC744700C8787D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0754B8F72AAC744700C8787D /* Preview Assets.xcassets */; };
 		0754B9022AAC744800C8787D /* AISleepStoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0754B9012AAC744800C8787D /* AISleepStoryTests.swift */; };
@@ -42,9 +43,10 @@
 		0437889B60E79C90A28874E2 /* Pods_AISleepStory_AISleepStoryUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AISleepStory_AISleepStoryUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0702BA8F2AACC9A800525BE2 /* XAINetRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XAINetRequest.swift; sourceTree = "<group>"; };
 		0702BA912AAD688F00525BE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0702BA922AAE0C0F00525BE2 /* XBMSpeechViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XBMSpeechViewModel.swift; sourceTree = "<group>"; };
 		0754B8ED2AAC744400C8787D /* AISleepStory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AISleepStory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0754B8F02AAC744400C8787D /* AISleepStoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AISleepStoryApp.swift; sourceTree = "<group>"; };
-		0754B8F22AAC744400C8787D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0754B8F22AAC744400C8787D /* XBMSpeechStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XBMSpeechStoryView.swift; sourceTree = "<group>"; };
 		0754B8F42AAC744700C8787D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0754B8F72AAC744700C8787D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0754B8FD2AAC744800C8787D /* AISleepStoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AISleepStoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,7 +121,8 @@
 			children = (
 				0702BA912AAD688F00525BE2 /* Info.plist */,
 				0754B8F02AAC744400C8787D /* AISleepStoryApp.swift */,
-				0754B8F22AAC744400C8787D /* ContentView.swift */,
+				0754B8F22AAC744400C8787D /* XBMSpeechStoryView.swift */,
+				0702BA922AAE0C0F00525BE2 /* XBMSpeechViewModel.swift */,
 				0754B8F42AAC744700C8787D /* Assets.xcassets */,
 				0754B8F62AAC744700C8787D /* Preview Content */,
 				0702BA8F2AACC9A800525BE2 /* XAINetRequest.swift */,
@@ -414,8 +417,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0754B8F32AAC744400C8787D /* ContentView.swift in Sources */,
+				0754B8F32AAC744400C8787D /* XBMSpeechStoryView.swift in Sources */,
 				0754B8F12AAC744400C8787D /* AISleepStoryApp.swift in Sources */,
+				0702BA932AAE0C0F00525BE2 /* XBMSpeechViewModel.swift in Sources */,
 				0702BA902AACC9A800525BE2 /* XAINetRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
