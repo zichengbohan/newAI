@@ -40,7 +40,7 @@ struct XBMSpeechStoryView: View {
                                     .foregroundColor(.white)
                             }
                             NavigationLink(destination: SelectSpeakerView(selectedVoice: $selectedVoice)) {
-                                Text("选择人物")
+                                Text("选择喜欢的声音")
                                     .padding()
                                     .background(Color.blue)
                                     .foregroundColor(.white)

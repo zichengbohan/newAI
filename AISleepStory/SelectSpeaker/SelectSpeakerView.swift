@@ -19,7 +19,7 @@ struct SelectSpeakerView: View {
     var body: some View {
         NavigationView{
             List(selection: $selectedItem){
-                Text("所有语音人物都是自动获取系统支持的语音，有些语音可能质量不好，请选择自己喜欢的语音,清空将使用您系统“辅助功能”语音的默认项")
+                Text("所有声音都是通过自动获取系统支持的声音，请选择自己喜欢的语音,清空将使用您系统设置内“辅助功能”声音的默认项")
                     .foregroundColor(.red)
                     .font(.system(size: 14))
                 ForEach(viewModel.items) { item in
@@ -55,7 +55,7 @@ struct SelectSpeakerView: View {
 //            .listRowBackground(Color.clear)
         }
         
-        .navigationBarTitle("选择人物", displayMode: .inline)
+        .navigationBarTitle("选择声音", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
                                 Button(action: {
@@ -63,13 +63,13 @@ struct SelectSpeakerView: View {
             presentationMode.wrappedValue.dismiss()
             
         }) {
-            Image(systemName: "chevron.backward")
-            Text("返回")
+            Image(systemName: "chevron.backward");
+            Text("返回");
         }, trailing:
                                 Button(action: {
             // 在此处添加你的自定义返回按钮操作
             selectedVoice = AVSpeechSynthesisVoice();
-            presentationMode.wrappedValue.dismiss()
+            presentationMode.wrappedValue.dismiss();
         }) {
             Text("清空")
         })

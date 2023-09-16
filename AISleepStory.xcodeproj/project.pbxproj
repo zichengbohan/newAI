@@ -125,6 +125,7 @@
 		0754B8EF2AAC744400C8787D /* AISleepStory */ = {
 			isa = PBXGroup;
 			children = (
+				076E34712AB5FAEA00C70204 /* Common */,
 				076E345F2AB4A2C500C70204 /* SelectSpeaker */,
 				0702BA912AAD688F00525BE2 /* Info.plist */,
 				0754B8F02AAC744400C8787D /* AISleepStoryApp.swift */,
@@ -197,6 +198,21 @@
 				076E346B2AB54B6C00C70204 /* Speaker.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		076E34712AB5FAEA00C70204 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				076E34722AB5FAEF00C70204 /* Extension */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		076E34722AB5FAEF00C70204 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		905CF0FB5A9BCFF8F61D1F0F /* Pods */ = {
