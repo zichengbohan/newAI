@@ -17,16 +17,31 @@ struct Message: Codable {
     let content: String
 }
 
+struct Paramters: Encodable {
+    var messages: [Message]
+    var stream: Bool
+}
+
 
 
 class XAINetRequest {
     
     public func requestChatMessage(message: Message, sucessBack: @escaping (NSDictionary) -> Void) {
-        let parameters: [String: [Message]] = [
-            "messages": [message]
-        ];
+        let param = Paramters(messages: [message], stream: false);
+//        AF.streamRequest(url, method: .post, parameters: param)
+//            .responseStreamString { stream in
+//                switch stream.event {
+//                case let .stream(result):
+//                    switch result {
+//                    case let .success(string):
+//                        print(string)
+//                    }
+//                case let .complete(completion):
+//                    print(completion)
+//                }
+//            }
 
-        AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default)
+        AF.request(url, method: .post, parameters: param, encoder: JSONParameterEncoder.default)
             .validate() // 可选：用于验证响应的状态码和内容
             .responseJSON { response in
                 switch response.result {

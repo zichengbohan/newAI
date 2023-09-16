@@ -16,45 +16,75 @@ struct XBMSpeechStoryView: View {
 //    @State private var aiSpeakContent: String = "";
     @State private var buttonTitle = "开始讲个英语故事";
     
+    init() {
+       AVSpeechSynthesisVoice.speechVoices() // <--  fetch voice dependencies
+       let vices = AVSpeechSynthesisVoice.speechVoices(); // <--  fetch voice dependencies
+       print("voices:", vices);
+      }
+    
     var body: some View {
-        VStack {
-            GeometryReader { geometry in
-                        ZStack {
-                            Image("home_bg") // 替换为您的图像名称
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: geometry.size.width, height: geometry.size.height)
-                                .clipped()
-                            
-                            VStack {
-                                ScrollView {
-                                    Text(viewModel.speechText)
-                                        .font(.title)
-                                        .fontWeight(.bold)
-                                        .padding(.top, 64)
-                                        .foregroundColor(.white)
-                                }
-                                
-                                Spacer()
-                                HStack {
-                                    Button {
-                                        viewModel.storyTapPublisher.send(textToSpeak);
-                                    } label: {
-                                        Text($buttonTitle.wrappedValue)
-                                            .frame(maxWidth: .infinity)
-                                            .font(.headline)
-                                            .foregroundColor(.white)
-                                            .padding()
-                                            .background(.blue)
-                                            .cornerRadius(16)
-                                    }
-                                    .padding(.horizontal, 20) // 设置按钮两边距离为 20 点
-                                }
-                                .padding(.bottom, 40) // 设置按钮与底部距离为 20 点
+        @StateObject var listViewModel = SelectSpeakerViewModel()
+        @State var isListVisible = false
+
+        NavigationView {
+            
+            VStack {
+                GeometryReader { geometry in
+                    ZStack {
+                        Image("home_bg") // 替换为您的图像名称
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .clipped()
+                        
+                        VStack {
+                            ScrollView {
+                                Text(viewModel.speechText)
+                                    .font(.title)
+                                    .fontWeight(.bold)
+                                    .padding(.top, 64)
+                                    .foregroundColor(.white)
                             }
+//                            Button("显示列表") {
+//                                                listViewModel.updateData(with: ["Item 1", "Item 2", "Item 3"])
+//                                                isListVisible = true
+//                                            }
+//                                            .padding()
+//                                            .background(Color.blue)
+//                                            .foregroundColor(.white)
+//                                            .cornerRadius(10)
+//                                            .sheet(isPresented: $isListVisible) {
+//                                                SelectSpeakerView(viewModel: listViewModel)
+//                                            }
+                            NavigationLink(destination: SelectSpeakerView(viewModel: SelectSpeakerViewModel())) {
+                                Text("选择人物")
+                                    .padding()
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                                    .padding(.bottom, 20)
+
+                            }
+                            HStack {
+                                Button {
+                                    viewModel.storyTapPublisher.send(textToSpeak);
+                                } label: {
+                                    Text($buttonTitle.wrappedValue)
+                                        .frame(maxWidth: .infinity)
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(.blue)
+                                        .cornerRadius(16)
+                                }
+                                .padding(.horizontal, 20) // 设置按钮两边距离为 20 点
+                            }
+                            .padding(.bottom, 40) // 设置按钮与底部距离为 20 点
                         }
                     }
-                    .edgesIgnoringSafeArea(.all)
+                }
+                .edgesIgnoringSafeArea(.all)
+            }
         }
     }
 }

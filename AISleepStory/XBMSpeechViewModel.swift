@@ -15,7 +15,6 @@ class XBMSynthViewModel: NSObject, ObservableObject {
     @Published var speechText: String = ""
     var storyTapPublisher = PassthroughSubject<String, Never>()
     private var cancellables: Set<AnyCancellable> = [];
-
     
      override init() {
          super.init();
@@ -30,9 +29,13 @@ class XBMSynthViewModel: NSObject, ObservableObject {
     func speackStory(textToSpeak: String) {
         let message = Message(role: "user", content: textToSpeak)
         XAINetRequest().requestChatMessage(message: message) { [weak self] value in
-            print("value", value["result"])
-            let speechUtterance = AVSpeechUtterance(string: value["result"] as! String);
-//            speechUtterance.voice = AVSpeechSynthesisVoice(language: "zh-CN");
+            let content = value["result"] as! String;
+            print("value:", content);
+
+            let speechUtterance = AVSpeechUtterance(string: content);
+//            let voice = AVSpeechSynthesisVoice(language: "en-US");
+            let voice = AVSpeechSynthesisVoice(identifier: "com.apple.speech.synthesis.voice.Fred");
+            speechUtterance.voice = voice;
             self?.speechSynthesizer.speak(speechUtterance);
             self?.speechText = value["result"] as! String;
         };
@@ -41,6 +44,7 @@ class XBMSynthViewModel: NSObject, ObservableObject {
 
 extension XBMSynthViewModel: AVSpeechSynthesizerDelegate {
   func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+      
     print("started")
   }
   func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance) {
@@ -48,7 +52,9 @@ extension XBMSynthViewModel: AVSpeechSynthesizerDelegate {
   }
   func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didContinue utterance: AVSpeechUtterance) {}
   func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {}
-  func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {}
+  func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+      print("")
+  }
   func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
     print("finished")
   }
