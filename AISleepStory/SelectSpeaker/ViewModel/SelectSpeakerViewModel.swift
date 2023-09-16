@@ -16,9 +16,11 @@ class SelectSpeakerViewModel: ObservableObject {
         AVSpeechSynthesisVoice.speechVoices() // <--  fetch voice dependencies
         let voices = AVSpeechSynthesisVoice.speechVoices(); // <--  fetch voice dependencies
         for voice in voices {
-            print(voice);
-            let speaker = Speaker(language: voice.language, name: voice.name, identifier: voice.identifier);
-            items.append(speaker);
+            if voice.language == "en-US" {
+                print(voice);
+                let speaker = Speaker(language: voice.language, name: voice.name, identifier: voice.identifier);
+                items.append(speaker);
+            }
         }
     }
     

@@ -16,17 +16,20 @@ class XBMSynthViewModel: NSObject, ObservableObject {
     var storyTapPublisher = PassthroughSubject<String, Never>()
     private var cancellables: Set<AnyCancellable> = [];
     
+    private let textToSpeak: String = "你是一个英语口语练习老师，你的学生是刚开始学英语的3-6岁的儿童，词汇要尽量简单一些，不要有难懂的词汇，所有的信息都要以小于6岁儿童适应为第一准则, 用英语随便打个招呼吧，然后你要讲一个小故事。讲完一个后你要用汉语分析这个英语小故事的词汇和内容";
+    
      override init() {
          super.init();
          self.speechSynthesizer.delegate = self;
          storyTapPublisher
-             .sink { [self] sayHello in
-                 speackStory(textToSpeak: sayHello);
+             .sink { [self] speaker in
+                 speackStory(with: speaker);
              }
              .store(in: &cancellables)
     }
 
-    func speackStory(textToSpeak: String) {
+    func speackStory(with speaker: String) {
+        self.speechSynthesizer.stopSpeaking(at: .word);
         let message = Message(role: "user", content: textToSpeak)
         XAINetRequest().requestChatMessage(message: message) { [weak self] value in
             let content = value["result"] as! String;
@@ -34,7 +37,7 @@ class XBMSynthViewModel: NSObject, ObservableObject {
 
             let speechUtterance = AVSpeechUtterance(string: content);
 //            let voice = AVSpeechSynthesisVoice(language: "en-US");
-            let voice = AVSpeechSynthesisVoice(identifier: "com.apple.speech.synthesis.voice.Fred");
+            let voice = AVSpeechSynthesisVoice(identifier: speaker);
             speechUtterance.voice = voice;
             self?.speechSynthesizer.speak(speechUtterance);
             self?.speechText = value["result"] as! String;

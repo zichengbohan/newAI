@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Speaker: Hashable  {
+struct Speaker: Identifiable, Hashable  {
     var id = UUID();
     var language: String;
     var name: String;
