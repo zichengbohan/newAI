@@ -18,7 +18,8 @@ class SelectSpeakerViewModel: ObservableObject {
         for voice in voices {
             if voice.language == "en-US" {
                 print(voice);
-                let speaker = Speaker(language: voice.language, name: voice.name, identifier: voice.identifier);
+                let speaker = Speaker(name: voice.name, voice: voice);
+                
                 items.append(speaker);
             }
         }

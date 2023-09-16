@@ -15,10 +15,9 @@ struct XBMSpeechStoryView: View {
      
 //    @State private var aiSpeakContent: String = "";
     @State private var buttonTitle = "开始讲个英语故事";
-    @State private var selectedSpeaker = "";
+    @State private var selectedVoice = AVSpeechSynthesisVoice();
     
     var body: some View {
-        @StateObject var listViewModel = SelectSpeakerViewModel()
         @State var isListVisible = false
 
         NavigationView {
@@ -40,7 +39,7 @@ struct XBMSpeechStoryView: View {
                                     .padding(.top, 64)
                                     .foregroundColor(.white)
                             }
-                            NavigationLink(destination: SelectSpeakerView(selectedSpeaker: $selectedSpeaker, viewModel: SelectSpeakerViewModel())) {
+                            NavigationLink(destination: SelectSpeakerView(selectedVoice: $selectedVoice)) {
                                 Text("选择人物")
                                     .padding()
                                     .background(Color.blue)
@@ -51,7 +50,7 @@ struct XBMSpeechStoryView: View {
                             }
                             HStack {
                                 Button {
-                                    viewModel.storyTapPublisher.send(selectedSpeaker);
+                                    viewModel.storyTapPublisher.send(selectedVoice);
                                 } label: {
                                     Text($buttonTitle.wrappedValue)
                                         .frame(maxWidth: .infinity)

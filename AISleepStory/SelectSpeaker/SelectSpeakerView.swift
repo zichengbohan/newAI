@@ -10,19 +10,22 @@ import Combine
 import AVFAudio
 
 struct SelectSpeakerView: View {
+    @ObservedObject var viewModel = SelectSpeakerViewModel()
     let speechSynthesizer = AVSpeechSynthesizer() // 创建语音合成器
     @State private var selectedItem: Speaker? = nil
     
-    @Binding var selectedSpeaker: String;
+    @Binding var selectedVoice: AVSpeechSynthesisVoice;
     @Environment(\.presentationMode) var presentationMode // 访问presentationMode
-    var viewModel: SelectSpeakerViewModel;
     var body: some View {
         NavigationView{
             List(selection: $selectedItem){
+                Text("所有语音人物都是自动获取系统支持的语音，有些语音可能质量不好，请选择自己喜欢的语音")
+                    .foregroundColor(.red)
+                    .font(.system(size: 14))
                 ForEach(viewModel.items) { item in
                     HStack {
                         Button {
-                            tryListion(name: item.name, speaker: item.identifier);
+                            tryListion(name: item.name, voice: item.voice);
                         } label: {
                             Image(systemName: "play.circle")
                                 .foregroundColor(.blue)
@@ -41,7 +44,8 @@ struct SelectSpeakerView: View {
                         .tag(item)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            selectedItem = item // 更新选中的项目
+                            selectedItem = item; // 更新选中的项目
+                            selectedVoice = item.voice;
                         }
                     }
                 }
@@ -61,25 +65,31 @@ struct SelectSpeakerView: View {
         }) {
             Image(systemName: "chevron.backward")
             Text("返回")
+        }, trailing:
+                                Button(action: {
+            // 在此处添加你的自定义返回按钮操作
+            
+        }) {
+            Text("清空")
+        })
+        .onAppear {
+            selectedItem = viewModel.items.first;
+            selectedVoice = selectedItem!.voice;
         }
-        )
     }
     
-    func tryListion(name: String, speaker: String)  {
+    func tryListion(name: String, voice: AVSpeechSynthesisVoice)  {
         self.speechSynthesizer.stopSpeaking(at: .word);
         let speechUtterance = AVSpeechUtterance(string: "Hello, my name is \(name)");
-        let voice = AVSpeechSynthesisVoice(identifier: speaker);
-        
-        
         speechUtterance.voice = voice;
         self.speechSynthesizer.speak(speechUtterance);
     }
 }
 
 struct SelectSpeakerView_Previews: PreviewProvider {
-    @State static var selectedSpeaker = "预览数据";
+    @State static var selectedVoice = AVSpeechSynthesisVoice();
     static var previews: some View {
         let viewmModel = SelectSpeakerViewModel();
-        SelectSpeakerView(selectedSpeaker: $selectedSpeaker, viewModel: viewmModel);
+        SelectSpeakerView(selectedVoice: $selectedVoice);
     }
 }
