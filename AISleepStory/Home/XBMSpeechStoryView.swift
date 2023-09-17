@@ -32,13 +32,22 @@ struct XBMSpeechStoryView: View {
                             .clipped()
                         
                         VStack {
-                            ScrollView {
-                                Text(viewModel.speechText)
-                                    .font(.title)
-                                    .fontWeight(.bold)
-                                    .padding(.top, 64)
+                            List(viewModel.speechTexts) { speechText in
+                                    Text(speechText.content)
                                     .foregroundColor(.white)
+                                    .listRowBackground(Color.clear)
+                                    .listRowSeparator(.hidden)
                             }
+                            .scrollContentBackground(.hidden)
+                            .background(.clear)
+                            .padding(.top, 20)
+//                            ScrollView {
+//                                Text(viewModel.speechText)
+//                                    .font(.title)
+//                                    .fontWeight(.bold)
+//                                    .padding(.top, 64)
+//                                    .foregroundColor(.white)
+//                            }
                             NavigationLink(destination: SelectSpeakerView(selectedVoice: $selectedVoice)) {
                                 Text("选择喜欢的声音")
                                     .padding()
@@ -69,6 +78,10 @@ struct XBMSpeechStoryView: View {
                 .edgesIgnoringSafeArea(.all)
             }
         }
+    }
+    
+    func add() {
+        viewModel.speechTexts.append(SpeakText(content: "hellllllll"))
     }
 }
 

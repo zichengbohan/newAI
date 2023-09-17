@@ -25,13 +25,35 @@ struct Paramters: Encodable {
 class XAINetRequest {
     
     public func requestChatMessage(message: Message, sucessBack: @escaping (NSDictionary, Bool) -> Void) {
+        let param = Paramters(messages: [message], stream: false);
+        NSLog("SpeakerStart")
+        AF.request(url, method: .post, parameters: param, encoder: JSONParameterEncoder.default)
+            .validate() // 可选：用于验证响应的状态码和内容
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    // 请求成功，处理返回的 JSON 数据
+                    NSLog("Speakerend")
+
+                    print("JSON 响应：\(value)")
+                    sucessBack(value as! NSDictionary, false);
+                case .failure(let error):
+                    // 请求失败，处理错误
+                    print("请求失败：\(error)")
+                }
+            }
+    }
+    
+    public func requestChatMessageStream(message: Message, sucessBack: @escaping (NSDictionary, Bool) -> Void) {
         let param = Paramters(messages: [message], stream: true);
+        NSLog("SpeakerStart")
         AF.streamRequest(url, method: .post, parameters: param, encoder: JSONParameterEncoder.default)
             .responseStreamString { stream in
             switch stream.event {
             case let .stream(result):
                 switch result {
                 case let .success(string):
+                    NSLog("Speakerend")
                     let jsonString = string.replacingOccurrences(of: "data:", with: "");
                     if let data = jsonString.data(using: .utf8) {
                         do {
@@ -51,20 +73,5 @@ class XAINetRequest {
 
             }
         }
-
-//        AF.request(url, method: .post, parameters: param, encoder: JSONParameterEncoder.default)
-//            .validate() // 可选：用于验证响应的状态码和内容
-//            .responseJSON { response in
-//                switch response.result {
-//                case .success(let value):
-//                    // 请求成功，处理返回的 JSON 数据
-//                    print("JSON 响应：\(value)")
-//                    sucessBack(value as! NSDictionary);
-//                case .failure(let error):
-//                    // 请求失败，处理错误
-//                    print("请求失败：\(error)")
-//                }
-//            }
-        
     }
 }

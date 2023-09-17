@@ -20,6 +20,7 @@
 		076E34632AB4A54B00C70204 /* SelectSpeakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E34622AB4A54B00C70204 /* SelectSpeakerView.swift */; };
 		076E34662AB4A64100C70204 /* SelectSpeakerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E34652AB4A64100C70204 /* SelectSpeakerViewModel.swift */; };
 		076E346C2AB54B6C00C70204 /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E346B2AB54B6C00C70204 /* Speaker.swift */; };
+		076E347A2AB6E4A600C70204 /* SpeakText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E34792AB6E4A600C70204 /* SpeakText.swift */; };
 		280DD92EA0B1F1F86993664A /* Pods_AISleepStoryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B14137DF5329BF6B7C4EE7C4 /* Pods_AISleepStoryTests.framework */; };
 		597A38BBF5873CFD2A99ABA4 /* Pods_AISleepStory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B017CE3EDADBC63ADE1FDA3 /* Pods_AISleepStory.framework */; };
 		CC9D2187B2B3E41869FA8CCC /* Pods_AISleepStory_AISleepStoryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0437889B60E79C90A28874E2 /* Pods_AISleepStory_AISleepStoryUITests.framework */; };
@@ -61,6 +62,7 @@
 		076E34622AB4A54B00C70204 /* SelectSpeakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSpeakerView.swift; sourceTree = "<group>"; };
 		076E34652AB4A64100C70204 /* SelectSpeakerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSpeakerViewModel.swift; sourceTree = "<group>"; };
 		076E346B2AB54B6C00C70204 /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
+		076E34792AB6E4A600C70204 /* SpeakText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakText.swift; sourceTree = "<group>"; };
 		22268B8A704F2C0BB9917623 /* Pods-AISleepStory-AISleepStoryUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AISleepStory-AISleepStoryUITests.debug.xcconfig"; path = "Target Support Files/Pods-AISleepStory-AISleepStoryUITests/Pods-AISleepStory-AISleepStoryUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2B57787836A60B420ACEFBF3 /* Pods-AISleepStory-AISleepStoryUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AISleepStory-AISleepStoryUITests.release.xcconfig"; path = "Target Support Files/Pods-AISleepStory-AISleepStoryUITests/Pods-AISleepStory-AISleepStoryUITests.release.xcconfig"; sourceTree = "<group>"; };
 		44B443FE1F60D2D69C5FD0BD /* Pods-AISleepStoryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AISleepStoryTests.debug.xcconfig"; path = "Target Support Files/Pods-AISleepStoryTests/Pods-AISleepStoryTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -126,14 +128,12 @@
 			isa = PBXGroup;
 			children = (
 				076E34712AB5FAEA00C70204 /* Common */,
+				076E34752AB6E45E00C70204 /* Home */,
 				076E345F2AB4A2C500C70204 /* SelectSpeaker */,
 				0702BA912AAD688F00525BE2 /* Info.plist */,
 				0754B8F02AAC744400C8787D /* AISleepStoryApp.swift */,
-				0754B8F22AAC744400C8787D /* XBMSpeechStoryView.swift */,
-				0702BA922AAE0C0F00525BE2 /* XBMSpeechViewModel.swift */,
 				0754B8F42AAC744700C8787D /* Assets.xcassets */,
 				0754B8F62AAC744700C8787D /* Preview Content */,
-				0702BA8F2AACC9A800525BE2 /* XAINetRequest.swift */,
 			);
 			path = AISleepStory;
 			sourceTree = "<group>";
@@ -203,6 +203,7 @@
 		076E34712AB5FAEA00C70204 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				076E34772AB6E47F00C70204 /* Net */,
 				076E34722AB5FAEF00C70204 /* Extension */,
 			);
 			path = Common;
@@ -213,6 +214,40 @@
 			children = (
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		076E34752AB6E45E00C70204 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				076E34782AB6E48D00C70204 /* Model */,
+				076E34762AB6E47200C70204 /* ViewModel */,
+				0754B8F22AAC744400C8787D /* XBMSpeechStoryView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		076E34762AB6E47200C70204 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0702BA922AAE0C0F00525BE2 /* XBMSpeechViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		076E34772AB6E47F00C70204 /* Net */ = {
+			isa = PBXGroup;
+			children = (
+				0702BA8F2AACC9A800525BE2 /* XAINetRequest.swift */,
+			);
+			path = Net;
+			sourceTree = "<group>";
+		};
+		076E34782AB6E48D00C70204 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				076E34792AB6E4A600C70204 /* SpeakText.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		905CF0FB5A9BCFF8F61D1F0F /* Pods */ = {
@@ -469,6 +504,7 @@
 				076E34662AB4A64100C70204 /* SelectSpeakerViewModel.swift in Sources */,
 				0754B8F32AAC744400C8787D /* XBMSpeechStoryView.swift in Sources */,
 				0754B8F12AAC744400C8787D /* AISleepStoryApp.swift in Sources */,
+				076E347A2AB6E4A600C70204 /* SpeakText.swift in Sources */,
 				076E34632AB4A54B00C70204 /* SelectSpeakerView.swift in Sources */,
 				076E346C2AB54B6C00C70204 /* Speaker.swift in Sources */,
 				0702BA932AAE0C0F00525BE2 /* XBMSpeechViewModel.swift in Sources */,
