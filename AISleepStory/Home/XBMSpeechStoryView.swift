@@ -10,10 +10,7 @@ import AVFoundation
 import Combine
 
 struct XBMSpeechStoryView: View {
-    @ObservedObject var viewModel = XBMSynthViewModel()
-//    @State private var textToSpeak: String = "你是一个英语口语练习老师，你的学生是刚开始学英语的3-6岁的儿童，词汇要尽量简单一些，不要有难懂的词汇，所有的信息都要以小于6岁儿童适应为第一准则, 用英语随便打个招呼吧，你的回答最终都要以问句结束";
-     
-//    @State private var aiSpeakContent: String = "";
+    @ObservedObject var viewModel = XBMSynthViewModel();
     @State private var buttonTitle = "开始讲个英语故事";
     @State private var selectedVoice = AVSpeechSynthesisVoice();
     
@@ -32,22 +29,7 @@ struct XBMSpeechStoryView: View {
                             .clipped()
                         
                         VStack {
-                            List(viewModel.speechTexts) { speechText in
-                                    Text(speechText.content)
-                                    .foregroundColor(.white)
-                                    .listRowBackground(Color.clear)
-                                    .listRowSeparator(.hidden)
-                            }
-                            .scrollContentBackground(.hidden)
-                            .background(.clear)
-                            .padding(.top, 20)
-//                            ScrollView {
-//                                Text(viewModel.speechText)
-//                                    .font(.title)
-//                                    .fontWeight(.bold)
-//                                    .padding(.top, 64)
-//                                    .foregroundColor(.white)
-//                            }
+                            SpeakWordsList(viewModel: viewModel)
                             NavigationLink(destination: SelectSpeakerView(selectedVoice: $selectedVoice)) {
                                 Text("选择喜欢的声音")
                                     .padding()
@@ -80,13 +62,34 @@ struct XBMSpeechStoryView: View {
         }
     }
     
-    func add() {
-        viewModel.speechTexts.append(SpeakText(content: "hellllllll"))
-    }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         XBMSpeechStoryView()
+    }
+}
+
+struct SpeakWordsList: View {
+    @ObservedObject var viewModel = XBMSynthViewModel();
+
+    var body: some View {
+        ScrollViewReader { scrollView in
+            List(viewModel.speechTexts, id: \.self) { speechText in
+                Text(speechText.content)
+                    .foregroundColor((viewModel.willSpeakItem.content == speechText.content) ? .red : .white)
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+                    .id(viewModel.speechTexts.firstIndex(of: speechText))
+            }
+            .scrollContentBackground(.hidden)
+            .background(.clear)
+            .padding(.top, 20)
+            .onReceive(viewModel.$speakLocation) { index in
+                withAnimation {
+                    scrollView.scrollTo(index, anchor: .center)
+                }
+            }
+        }
     }
 }
