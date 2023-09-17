@@ -22,38 +22,47 @@ struct Paramters: Encodable {
     var stream: Bool
 }
 
-
-
 class XAINetRequest {
     
     public func requestChatMessage(message: Message, sucessBack: @escaping (NSDictionary) -> Void) {
-        let param = Paramters(messages: [message], stream: false);
-//        AF.streamRequest(url, method: .post, parameters: param)
-//            .responseStreamString { stream in
-//                switch stream.event {
-//                case let .stream(result):
-//                    switch result {
-//                    case let .success(string):
-//                        print(string)
-//                    }
-//                case let .complete(completion):
-//                    print(completion)
+        let param = Paramters(messages: [Message(role: "user", content: "给我推荐一些自驾游路线")], stream: true);
+        AF.streamRequest(url, method: .post, parameters: param, encoder: JSONParameterEncoder.default)
+            .responseStreamString { stream in
+            switch stream.event {
+            case let .stream(result):
+                switch result {
+                case let .success(string):
+                    let jsonString = string.replacingOccurrences(of: "data:", with: "");
+                    if let data = jsonString.data(using: .utf8) {
+                        do {
+                            if let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
+                                // 使用转换后的字典
+                                print(dictionary)
+                                sucessBack(dictionary);
+                            }
+                        } catch {
+                            print("转换失败：\(error.localizedDescription)")
+                        }
+                    }
+                }
+            case let .complete(completion):
+                print(completion)
+            }
+        }
+
+//        AF.request(url, method: .post, parameters: param, encoder: JSONParameterEncoder.default)
+//            .validate() // 可选：用于验证响应的状态码和内容
+//            .responseJSON { response in
+//                switch response.result {
+//                case .success(let value):
+//                    // 请求成功，处理返回的 JSON 数据
+//                    print("JSON 响应：\(value)")
+//                    sucessBack(value as! NSDictionary);
+//                case .failure(let error):
+//                    // 请求失败，处理错误
+//                    print("请求失败：\(error)")
 //                }
 //            }
-
-        AF.request(url, method: .post, parameters: param, encoder: JSONParameterEncoder.default)
-            .validate() // 可选：用于验证响应的状态码和内容
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    // 请求成功，处理返回的 JSON 数据
-                    print("JSON 响应：\(value)")
-                    sucessBack(value as! NSDictionary);
-                case .failure(let error):
-                    // 请求失败，处理错误
-                    print("请求失败：\(error)")
-                }
-            }
         
     }
 }
