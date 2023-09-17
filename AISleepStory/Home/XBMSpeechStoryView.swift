@@ -11,9 +11,7 @@ import Combine
 
 struct XBMSpeechStoryView: View {
     @ObservedObject var viewModel = XBMSynthViewModel();
-    @State private var buttonTitle = "开始讲个英语故事";
     @State private var selectedVoice = AVSpeechSynthesisVoice();
-    
     var body: some View {
         @State var isListVisible = false
 
@@ -39,21 +37,7 @@ struct XBMSpeechStoryView: View {
                                     .padding(.bottom, 20)
 
                             }
-                            HStack {
-                                Button {
-                                    viewModel.storyTapPublisher.send(selectedVoice);
-                                } label: {
-                                    Text($buttonTitle.wrappedValue)
-                                        .frame(maxWidth: .infinity)
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .background(.blue)
-                                        .cornerRadius(16)
-                                }
-                                .padding(.horizontal, 20) // 设置按钮两边距离为 20 点
-                            }
-                            .padding(.bottom, 40) // 设置按钮与底部距离为 20 点
+                            SpeakButton(viewModel: viewModel) // 设置按钮与底部距离为 20 点
                         }
                     }
                 }
@@ -71,7 +55,7 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct SpeakWordsList: View {
-    @ObservedObject var viewModel = XBMSynthViewModel();
+    @ObservedObject var viewModel: XBMSynthViewModel;
 
     var body: some View {
         ScrollViewReader { scrollView in
@@ -91,5 +75,68 @@ struct SpeakWordsList: View {
                 }
             }
         }
+    }
+}
+
+struct SpeakButton: View {
+    @ObservedObject var viewModel: XBMSynthViewModel;
+    @State private var isSpeaking = false;
+    @State private var selectedVoice = AVSpeechSynthesisVoice();
+    @State private var buttonTitle = "开始讲个英语故事";
+
+
+    var body: some View {
+        HStack {
+            if isSpeaking {
+                HStack{
+                    Button {
+                        if viewModel.isPauseSpeak() {
+                            viewModel.continueSpeak();
+                        } else {
+                            viewModel.pauseSpeak();
+                        }
+                    } label: {
+                        Text(viewModel.isPauseSpeak() ? "播放" : "暂停")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .padding()
+                            .background(.blue)
+                            .cornerRadius(8)
+                    }
+                    .padding(.leading, 80)
+                    Spacer()
+                    Button {
+                        viewModel.stopSpeak();
+                        self.isSpeaking.toggle();
+                    } label: {
+                        Text("停止")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .padding()
+                            .background(.blue)
+                            .cornerRadius(8)
+                    }
+                    .padding(.trailing, 80)
+                    
+                    
+                }
+            } else {
+                Button {
+                    viewModel.storyTapPublisher.send(selectedVoice);
+                    self.isSpeaking.toggle();
+                } label: {
+                    Text($buttonTitle.wrappedValue)
+                        .frame(maxWidth: .infinity)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(.blue)
+                        .cornerRadius(16)
+                }
+                .padding(.horizontal, 20) // 设置按钮两边距离为 20 点
+            }
+            
+        }
+        .padding(.bottom, 40)
     }
 }
