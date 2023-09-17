@@ -24,8 +24,8 @@ struct Paramters: Encodable {
 
 class XAINetRequest {
     
-    public func requestChatMessage(message: Message, sucessBack: @escaping (NSDictionary) -> Void) {
-        let param = Paramters(messages: [Message(role: "user", content: "给我推荐一些自驾游路线")], stream: true);
+    public func requestChatMessage(message: Message, sucessBack: @escaping (NSDictionary, Bool) -> Void) {
+        let param = Paramters(messages: [message], stream: true);
         AF.streamRequest(url, method: .post, parameters: param, encoder: JSONParameterEncoder.default)
             .responseStreamString { stream in
             switch stream.event {
@@ -38,7 +38,7 @@ class XAINetRequest {
                             if let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
                                 // 使用转换后的字典
                                 print(dictionary)
-                                sucessBack(dictionary);
+                                sucessBack(dictionary, false);
                             }
                         } catch {
                             print("转换失败：\(error.localizedDescription)")
@@ -47,6 +47,8 @@ class XAINetRequest {
                 }
             case let .complete(completion):
                 print(completion)
+                sucessBack([:], true);
+
             }
         }
 

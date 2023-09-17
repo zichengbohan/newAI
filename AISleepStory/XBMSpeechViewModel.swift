@@ -31,21 +31,24 @@ class XBMSynthViewModel: NSObject, ObservableObject {
     func speackStory(with voice: AVSpeechSynthesisVoice) {
         self.speechSynthesizer.stopSpeaking(at: .word);
         let message = Message(role: "user", content: textToSpeak)
-        XAINetRequest().requestChatMessage(message: message) { [weak self] value in
-            let content = value["result"] as! String;
-            print("value:", content);
+        XAINetRequest().requestChatMessage(message: message) { [weak self] (value, success) in
+            if !success {
+                let content = value["result"] as! String;
+                NSLog("Value:%@", content)
 
-            let speechUtterance = AVSpeechUtterance(string: content);
-            speechUtterance.voice = voice;
-            self?.speechSynthesizer.speak(speechUtterance);
-            self?.speechText = value["result"] as! String;
+                let speechUtterance = AVSpeechUtterance(string: content);
+                speechUtterance.voice = voice;
+                self?.speechSynthesizer.speak(speechUtterance);
+//                self?.speechText = value["result"] as! String;
+            }
         };
     }
 }
 
 extension XBMSynthViewModel: AVSpeechSynthesizerDelegate {
   func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
-      
+      self.speechText = utterance.speechString;
+
     print("started")
   }
   func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance) {
