@@ -90,13 +90,13 @@ struct SpeakButton: View {
             if isSpeaking {
                 HStack{
                     Button {
-                        if viewModel.isPauseSpeak() {
+                        if viewModel.isPausing {
                             viewModel.continueSpeak();
                         } else {
                             viewModel.pauseSpeak();
                         }
                     } label: {
-                        Text(viewModel.isPauseSpeak() ? "播放" : "暂停")
+                        Text(viewModel.isPausing ? "播放" : "暂停")
                             .foregroundColor(.white)
                             .font(.headline)
                             .padding()
