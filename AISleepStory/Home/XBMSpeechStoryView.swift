@@ -37,7 +37,7 @@ struct XBMSpeechStoryView: View {
                                     .padding(.bottom, 20)
 
                             }
-                            SpeakButton(viewModel: viewModel) // 设置按钮与底部距离为 20 点
+                            SpeakButton(viewModel: viewModel, selectedVoice: $selectedVoice) // 设置按钮与底部距离为 20 点
                         }
                     }
                 }
@@ -80,14 +80,13 @@ struct SpeakWordsList: View {
 
 struct SpeakButton: View {
     @ObservedObject var viewModel: XBMSynthViewModel;
-    @State private var isSpeaking = false;
-    @State private var selectedVoice = AVSpeechSynthesisVoice();
+    @Binding var selectedVoice: AVSpeechSynthesisVoice;
     @State private var buttonTitle = "开始讲个英语故事";
 
 
     var body: some View {
         HStack {
-            if isSpeaking {
+            if viewModel.isSpeaking {
                 HStack{
                     Button {
                         if viewModel.isPausing {
@@ -107,7 +106,6 @@ struct SpeakButton: View {
                     Spacer()
                     Button {
                         viewModel.stopSpeak();
-                        self.isSpeaking.toggle();
                     } label: {
                         Text("停止")
                             .foregroundColor(.white)
@@ -123,15 +121,25 @@ struct SpeakButton: View {
             } else {
                 Button {
                     viewModel.storyTapPublisher.send(selectedVoice);
-                    self.isSpeaking.toggle();
                 } label: {
-                    Text($buttonTitle.wrappedValue)
-                        .frame(maxWidth: .infinity)
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(.blue)
-                        .cornerRadius(16)
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .frame(maxWidth: .infinity)
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(.blue)
+                            .cornerRadius(16)
+                            .progressViewStyle(CircularProgressViewStyle())
+                    } else {
+                        Text($buttonTitle.wrappedValue)
+                            .frame(maxWidth: .infinity)
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(.blue)
+                            .cornerRadius(16)
+                    }
                 }
                 .padding(.horizontal, 20) // 设置按钮两边距离为 20 点
             }
