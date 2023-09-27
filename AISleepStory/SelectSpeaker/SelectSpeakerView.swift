@@ -54,7 +54,6 @@ struct SelectSpeakerView: View {
             .listRowBackground(Color(UIColor.systemBackground))
 //            .listRowBackground(Color.clear)
         }
-        
         .navigationBarTitle("选择声音", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:

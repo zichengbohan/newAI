@@ -12,6 +12,7 @@ struct AISleepStoryApp: App {
     var body: some Scene {
         WindowGroup {
             XBMSpeechStoryView()
+                .background(Color.gray)
         }
     }
 }

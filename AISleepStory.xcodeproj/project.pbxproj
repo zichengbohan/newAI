@@ -21,6 +21,9 @@
 		076E34662AB4A64100C70204 /* SelectSpeakerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E34652AB4A64100C70204 /* SelectSpeakerViewModel.swift */; };
 		076E346C2AB54B6C00C70204 /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E346B2AB54B6C00C70204 /* Speaker.swift */; };
 		076E347A2AB6E4A600C70204 /* SpeakText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E34792AB6E4A600C70204 /* SpeakText.swift */; };
+		0793F5FB2AC1BBF600A04FA6 /* Subscrilbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793F5FA2AC1BBF600A04FA6 /* Subscrilbe.swift */; };
+		0793F5FE2AC1BC1500A04FA6 /* SubscribeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793F5FD2AC1BC1500A04FA6 /* SubscribeViewModel.swift */; };
+		07BC60412AC18B5E00186164 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07BC60402AC18B5E00186164 /* Launch Screen.storyboard */; };
 		280DD92EA0B1F1F86993664A /* Pods_AISleepStoryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B14137DF5329BF6B7C4EE7C4 /* Pods_AISleepStoryTests.framework */; };
 		597A38BBF5873CFD2A99ABA4 /* Pods_AISleepStory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B017CE3EDADBC63ADE1FDA3 /* Pods_AISleepStory.framework */; };
 		CC9D2187B2B3E41869FA8CCC /* Pods_AISleepStory_AISleepStoryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0437889B60E79C90A28874E2 /* Pods_AISleepStory_AISleepStoryUITests.framework */; };
@@ -63,6 +66,9 @@
 		076E34652AB4A64100C70204 /* SelectSpeakerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSpeakerViewModel.swift; sourceTree = "<group>"; };
 		076E346B2AB54B6C00C70204 /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
 		076E34792AB6E4A600C70204 /* SpeakText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakText.swift; sourceTree = "<group>"; };
+		0793F5FA2AC1BBF600A04FA6 /* Subscrilbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscrilbe.swift; sourceTree = "<group>"; };
+		0793F5FD2AC1BC1500A04FA6 /* SubscribeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewModel.swift; sourceTree = "<group>"; };
+		07BC60402AC18B5E00186164 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		22268B8A704F2C0BB9917623 /* Pods-AISleepStory-AISleepStoryUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AISleepStory-AISleepStoryUITests.debug.xcconfig"; path = "Target Support Files/Pods-AISleepStory-AISleepStoryUITests/Pods-AISleepStory-AISleepStoryUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2B57787836A60B420ACEFBF3 /* Pods-AISleepStory-AISleepStoryUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AISleepStory-AISleepStoryUITests.release.xcconfig"; path = "Target Support Files/Pods-AISleepStory-AISleepStoryUITests/Pods-AISleepStory-AISleepStoryUITests.release.xcconfig"; sourceTree = "<group>"; };
 		44B443FE1F60D2D69C5FD0BD /* Pods-AISleepStoryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AISleepStoryTests.debug.xcconfig"; path = "Target Support Files/Pods-AISleepStoryTests/Pods-AISleepStoryTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +133,7 @@
 		0754B8EF2AAC744400C8787D /* AISleepStory */ = {
 			isa = PBXGroup;
 			children = (
+				0793F5F92AC1BB0000A04FA6 /* AppleSubscribe */,
 				076E34712AB5FAEA00C70204 /* Common */,
 				076E34752AB6E45E00C70204 /* Home */,
 				076E345F2AB4A2C500C70204 /* SelectSpeaker */,
@@ -134,6 +141,7 @@
 				0754B8F02AAC744400C8787D /* AISleepStoryApp.swift */,
 				0754B8F42AAC744700C8787D /* Assets.xcassets */,
 				0754B8F62AAC744700C8787D /* Preview Content */,
+				07BC60402AC18B5E00186164 /* Launch Screen.storyboard */,
 			);
 			path = AISleepStory;
 			sourceTree = "<group>";
@@ -248,6 +256,23 @@
 				076E34792AB6E4A600C70204 /* SpeakText.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		0793F5F92AC1BB0000A04FA6 /* AppleSubscribe */ = {
+			isa = PBXGroup;
+			children = (
+				0793F5FC2AC1BC0100A04FA6 /* ViewModel */,
+				0793F5FA2AC1BBF600A04FA6 /* Subscrilbe.swift */,
+			);
+			path = AppleSubscribe;
+			sourceTree = "<group>";
+		};
+		0793F5FC2AC1BC0100A04FA6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0793F5FD2AC1BC1500A04FA6 /* SubscribeViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		905CF0FB5A9BCFF8F61D1F0F /* Pods */ = {
@@ -372,6 +397,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07BC60412AC18B5E00186164 /* Launch Screen.storyboard in Resources */,
 				0754B8F82AAC744700C8787D /* Preview Assets.xcassets in Resources */,
 				0754B8F52AAC744700C8787D /* Assets.xcassets in Resources */,
 			);
@@ -505,9 +531,11 @@
 				0754B8F32AAC744400C8787D /* XBMSpeechStoryView.swift in Sources */,
 				0754B8F12AAC744400C8787D /* AISleepStoryApp.swift in Sources */,
 				076E347A2AB6E4A600C70204 /* SpeakText.swift in Sources */,
+				0793F5FE2AC1BC1500A04FA6 /* SubscribeViewModel.swift in Sources */,
 				076E34632AB4A54B00C70204 /* SelectSpeakerView.swift in Sources */,
 				076E346C2AB54B6C00C70204 /* Speaker.swift in Sources */,
 				0702BA932AAE0C0F00525BE2 /* XBMSpeechViewModel.swift in Sources */,
+				0793F5FB2AC1BBF600A04FA6 /* Subscrilbe.swift in Sources */,
 				0702BA902AACC9A800525BE2 /* XAINetRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,25 +693,31 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AISleepStory/Preview Content\"";
-				DEVELOPMENT_TEAM = 3768N57L6C;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = EP73U6E2WX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AISleepStory/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.baimiao.xu.AISleepStory;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baimiao.AISleepStory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AISleepStoryDev;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -696,25 +730,31 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AISleepStory/Preview Content\"";
-				DEVELOPMENT_TEAM = 3768N57L6C;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = EP73U6E2WX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AISleepStory/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.baimiao.xu.AISleepStory;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baimiao.AISleepStory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AISleepStoryDev;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

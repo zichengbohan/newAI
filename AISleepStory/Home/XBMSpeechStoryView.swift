@@ -8,6 +8,7 @@
 import SwiftUI
 import AVFoundation
 import Combine
+import StoreKit
 
 struct XBMSpeechStoryView: View {
     @ObservedObject var viewModel = XBMSynthViewModel();
@@ -43,8 +44,45 @@ struct XBMSpeechStoryView: View {
                 }
                 .edgesIgnoringSafeArea(.all)
             }
+            .navigationBarItems(leading:
+                                    // 在此处添加你的自定义返回按钮操作
+                                NavigationLink(destination: Subscrilbe()) {
+                Text("开通VIP")
+                    .padding(.horizontal, 15)
+                    .padding(.vertical, 5)
+                    .background(Color.yellow)
+                    .foregroundColor(.white)
+                    .cornerRadius(20)
+            }
+            )
+                                
+                
+                
+//            }) {
+//                Text("订阅VIP")
+//                    .foregroundColor(.white)
+//            }, trailing:
+//                                    Button(action: {
+//            }) {
+////                Text("清空")
+//            })
         }
     }
+    
+//    func getProductForSubscrible() async {
+//        do {
+//            let productIdentifiers = ["aisleepstory_month", "aisleepstory_year"]
+//            let appProducts = try await Product.products(for: productIdentifiers)
+//            print("appProducts", appProducts);
+//            let product: Product = appProducts.first!;
+//            do {
+//                let purchaseResult = try await product.purchase();
+//                print("purchaseResult:", purchaseResult)
+//            } catch {}
+//        
+//        } catch {}
+//        
+//    }
     
 }
 
