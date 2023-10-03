@@ -19,7 +19,7 @@ struct Subscrilbe: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 100, height: 100)
                     .cornerRadius(10)
-                    .padding(.top, 30)
+                    .padding(.top, 10)
                 Text("选择订阅方案")
                     .foregroundColor(.white)
                     .padding()
@@ -55,13 +55,14 @@ struct Subscrilbe: View {
                                 Text("原价：")
                                 Text(viewModel.selectedOriginPrice)
                                     .foregroundColor(.gray)
+                                    .strikethrough(true, color: .gray)
                             }
                         }
                         .foregroundColor(.white)
                     }
                     
                 }
-                .padding(.horizontal, 30)
+                .padding(.horizontal, 20)
                 .padding(.vertical, 20)
                 .background(Color(red: 49/255, green: 65/255, blue: 87/255))
                 .cornerRadius(10)
@@ -85,7 +86,22 @@ struct Subscrilbe: View {
                 }
                 .frame(height: 220)
                 .cornerRadius(10)
-                
+                Button {
+                    Task {
+                        do {
+                            let purchaseResult = try await viewModel.selectedItem?.purchase(); 
+                        } catch {}
+                    }
+                } label: {
+                    Text("去付款")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(.blue)
+                        .cornerRadius(15)
+                    
+                }
+                .padding()
+
             }
             .padding(.horizontal, 35)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
