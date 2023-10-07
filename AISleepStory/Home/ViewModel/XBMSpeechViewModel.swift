@@ -9,6 +9,7 @@ import Foundation
 import AVFoundation
 import Combine
 
+public typealias ProductId = String
 
 class XBMSynthViewModel: NSObject, ObservableObject {
     let speechSynthesizer = AVSpeechSynthesizer(); // 创建语音合成器
@@ -26,12 +27,32 @@ class XBMSynthViewModel: NSObject, ObservableObject {
      override init() {
          self.speechTexts = [];
          super.init();
+         processReceipt()
          self.speechSynthesizer.delegate = self;
          storyTapPublisher
              .sink { [self] voice in
                  speackStory(with: voice);
              }
              .store(in: &cancellables)
+    }
+    
+    public func processReceipt() -> Bool {
+        print("receiptValidationStarted")
+        
+        var receipt = IAPReceipt()
+        
+        guard receipt.isReachable,
+              receipt.load(),
+              receipt.validateSigning(),
+              receipt.read(),
+              receipt.validate() else {
+            
+            print("receiptProcessingFailure")
+            return false
+        }
+        
+        print("receiptProcessingSuccess")
+        return true
     }
 
     func speackStory(with voice: AVSpeechSynthesisVoice) {
