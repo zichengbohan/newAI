@@ -44,6 +44,27 @@ struct XBMSpeechStoryView: View {
                 }
                 .edgesIgnoringSafeArea(.all)
             }
+            .alert(isPresented: $viewModel.showUpdate, content: {
+                Alert(
+                    title: Text("提示"),
+                    message: Text("请升级app"),
+                    primaryButton: .default(Text("OK")) {
+                        // 处理点击“OK”按钮的操作
+                        let appStoreURLString = "https://apps.apple.com/app/6467557832"
+                        
+                        if let appStoreURL = URL(string: appStoreURLString) {
+                            UIApplication.shared.open(appStoreURL, options: [:]) { success in
+                                if success {
+//                                    print("Successfully opened App Store")
+                                } else {
+//                                    print("Failed to open App Store")
+                                }
+                            }
+                        }
+                    },
+                    secondaryButton: .cancel()
+                )
+            })
             .navigationBarItems(leading:
                                     // 在此处添加你的自定义返回按钮操作
                                 NavigationLink(destination: Subscrilbe()) {
