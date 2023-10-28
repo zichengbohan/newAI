@@ -65,28 +65,39 @@ struct XBMSpeechStoryView: View {
                     secondaryButton: .cancel()
                 )
             })
-            .navigationBarItems(leading:
-                                    // 在此处添加你的自定义返回按钮操作
-                                NavigationLink(destination: Subscrilbe()) {
-                Text("开通VIP")
-                    .padding(.horizontal, 15)
-                    .padding(.vertical, 5)
-                    .background(Color.yellow)
-                    .foregroundColor(.white)
-                    .cornerRadius(20)
-            }
-            )
+            .alert(isPresented: $viewModel.showRequestError, content: {
+                Alert(
+                    title: Text("提示"),
+                    message: Text("请升级app"),
+                    primaryButton: .default(Text("OK")) {
+                        // 处理点击“OK”按钮的操作
+                    },
+                    secondaryButton: .cancel()
+                )
+            })
+//            .alert(isPresented: $viewModel.showVipAlert, content: {
+//                Alert(
+//                    title: Text("提示"),
+//                    message: Text("您的用时已使用完毕，请购买VIP，体验无限时长"),
+//                    primaryButton: .default(Text("OK")) {
+//                        // 处理点击“OK”按钮的操作
+//                    },
+//                    secondaryButton: .cancel()
+//                )
+//            })
+//            .navigationBarItems(leading:
+//                                    // 在此处添加你的自定义返回按钮操作
+//                                NavigationLink(destination: Subscrilbe()) {
+//                Text("开通VIP")
+//                    .padding(.horizontal, 15)
+//                    .padding(.vertical, 5)
+//                    .background(Color.yellow)
+//                    .foregroundColor(.white)
+//                    .cornerRadius(20)
+//            }
+//            )
                                 
                 
-                
-//            }) {
-//                Text("订阅VIP")
-//                    .foregroundColor(.white)
-//            }, trailing:
-//                                    Button(action: {
-//            }) {
-////                Text("清空")
-//            })
         }
     }
     

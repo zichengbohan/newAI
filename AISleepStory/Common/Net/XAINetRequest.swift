@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 // 定义目标 URL
-let url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/eb-instant?access_token=24.e0005181b8a7083658d05f9a68f142f5.2592000.1696865676.282335-39059758"
+let url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/eb-instant?access_token=24.adb6e3730b9220660975554727a0ee4f.2592000.1701083283.282335-39059758"
 
 struct DecodableType: Decodable { let url: String }
 struct Message: Codable {

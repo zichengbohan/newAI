@@ -21,6 +21,9 @@ class XBMSynthViewModel: NSObject, ObservableObject {
     @Published var isLoading = false;
     @Published var isSpeaking = false;
     @Published var showUpdate = false;
+    @Published var isVIP = false;
+    @Published var showVipAlert = false;
+    @Published var showRequestError = false;
     var storyTapPublisher = PassthroughSubject<AVSpeechSynthesisVoice, Never>();
     private var cancellables: Set<AnyCancellable> = [];
     private let textToSpeak: String = "你是一个英语口语练习老师，你的学生是刚开始学英语的3-6岁的儿童，词汇要尽量简单一些，不要有难懂的词汇，所有的信息都要以小于6岁儿童适应为第一准则, 用英语随便打个招呼吧，然后你要讲一个小故事。讲完一个后你要用汉语分析这个英语小故事的词汇和内容";
@@ -29,7 +32,12 @@ class XBMSynthViewModel: NSObject, ObservableObject {
      override init() {
          self.speechTexts = [];
          super.init();
-//         processReceipt();
+//         self.isVIP = processReceipt();
+//         if !self.isVIP{
+//             self.showVipAlert = true;
+//             return;
+//         }
+         
          self.speechSynthesizer.delegate = self;
          storyTapPublisher
              .sink { [self] voice in
@@ -68,8 +76,13 @@ class XBMSynthViewModel: NSObject, ObservableObject {
                 return // self 已释放
             }
             strongSelf.isLoading = false;
-            if value["error_code"] as! Int == 111 {
-                strongSelf.showUpdate = true;
+        
+            if let errorCode = value["error_code"] as? Int {
+                if errorCode == 111 || errorCode == 110 {
+                    strongSelf.showUpdate = true;
+                    return;
+                }
+                strongSelf.showRequestError = true;
                 return;
             }
             strongSelf.isSpeaking = true;
