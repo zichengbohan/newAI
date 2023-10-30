@@ -49,18 +49,18 @@ class XBMSynthViewModel: NSObject, ObservableObject {
     public func processReceipt() -> Bool {
         print("receiptValidationStarted")
         
-        var receipt = IAPReceipt()
+//        var receipt = IAPReceipt()
         
-        guard receipt.isReachable,
-              receipt.load(),
-              receipt.validateSigning(),
-              receipt.read(),
-              receipt.validate() else {
-            
-            print("receiptProcessingFailure")
-            return false
-        }
-        
+//        guard receipt.isReachable,
+//              receipt.load(),
+//              receipt.validateSigning(),
+//              receipt.read(),
+//              receipt.validate() else {
+//            
+//            print("receiptProcessingFailure")
+//            return false
+//        }
+//        
         print("receiptProcessingSuccess")
         return true
     }
