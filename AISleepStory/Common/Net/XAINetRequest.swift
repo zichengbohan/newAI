@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 // 定义目标 URL
-let url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/eb-instant?access_token=24.adb6e3730b9220660975554727a0ee4f.2592000.1701083283.282335-39059758"
+let url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/ai_apaas?access_token=24.960279288777d77c52f989d513886fbf.2592000.1722848873.282335-39059758"
 
 struct DecodableType: Decodable { let url: String }
 struct Message: Codable {
@@ -24,7 +24,11 @@ struct Paramters: Encodable {
 
 class XAINetRequest {
     
-    public func requestChatMessage(message: Message, sucessBack: @escaping (NSDictionary, Bool) -> Void) {
+	public func requestChatMessage(
+		message: Message,
+		sucessBack: @escaping (NSDictionary, Bool) -> Void,
+		failedBack: @escaping (NSError) -> Void
+	) {
         let param = Paramters(messages: [message], stream: false);
         NSLog("SpeakerStart")
         AF.request(url, method: .post, parameters: param, encoder: JSONParameterEncoder.default)
@@ -33,9 +37,15 @@ class XAINetRequest {
                 switch response.result {
                 case .success(let value):
                     // 请求成功，处理返回的 JSON 数据
-                    NSLog("Speakerend")
-
                     print("JSON 响应：\(value)")
+					if let dictionary = value as? [String: Any] {
+						if let error_code = dictionary["error_code"] as? Int {
+							if error_code == 111 || error_code == 110  {
+								failedBack(NSError(domain: "", code: error_code, userInfo: [NSLocalizedDescriptionKey: "所用token已到期请更新的app"]))
+								return
+							}
+						}
+					}
                     sucessBack(value as! NSDictionary, false);
                 case .failure(let error):
                     // 请求失败，处理错误

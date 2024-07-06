@@ -11,116 +11,87 @@ import Combine
 import StoreKit
 
 struct XBMSpeechStoryView: View {
-    @ObservedObject var viewModel = XBMSynthViewModel();
-    @State private var selectedVoice = AVSpeechSynthesisVoice();
-    var body: some View {
-        @State var isListVisible = false
-
-        NavigationView {
-            
-            VStack {
-                GeometryReader { geometry in
-                    ZStack {
-                        Image("home_bg") // 替换为您的图像名称
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geometry.size.width, height: geometry.size.height)
-                            .clipped()
-                        
-                        VStack {
-                            SpeakWordsList(viewModel: viewModel)
-                            NavigationLink(destination: SelectSpeakerView(selectedVoice: $selectedVoice)) {
-                                Text("选择喜欢的声音")
-                                    .padding()
-                                    .background(Color.blue)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(10)
-                                    .padding(.bottom, 20)
-
-                            }
-                            SpeakButton(viewModel: viewModel, selectedVoice: $selectedVoice) // 设置按钮与底部距离为 20 点
-                        }
-                    }
-                }
-                .edgesIgnoringSafeArea(.all)
-            }
-            .alert(isPresented: $viewModel.showUpdate, content: {
-                Alert(
-                    title: Text("提示"),
-                    message: Text("请升级app"),
-                    primaryButton: .default(Text("OK")) {
-                        // 处理点击“OK”按钮的操作
-                        let appStoreURLString = "https://apps.apple.com/app/6467557832"
-                        
-                        if let appStoreURL = URL(string: appStoreURLString) {
-                            UIApplication.shared.open(appStoreURL, options: [:]) { success in
-                                if success {
-//                                    print("Successfully opened App Store")
-                                } else {
-//                                    print("Failed to open App Store")
-                                }
-                            }
-                        }
-                    },
-                    secondaryButton: .cancel()
-                )
-            })
-            .alert(isPresented: $viewModel.showRequestError, content: {
-                Alert(
-                    title: Text("提示"),
-                    message: Text("请升级app"),
-                    primaryButton: .default(Text("OK")) {
-                        // 处理点击“OK”按钮的操作
-                    },
-                    secondaryButton: .cancel()
-                )
-            })
-//            .alert(isPresented: $viewModel.showVipAlert, content: {
-//                Alert(
-//                    title: Text("提示"),
-//                    message: Text("您的用时已使用完毕，请购买VIP，体验无限时长"),
-//                    primaryButton: .default(Text("OK")) {
-//                        // 处理点击“OK”按钮的操作
-//                    },
-//                    secondaryButton: .cancel()
-//                )
-//            })
-//            .navigationBarItems(leading:
-//                                    // 在此处添加你的自定义返回按钮操作
-//                                NavigationLink(destination: Subscrilbe()) {
-//                Text("开通VIP")
-//                    .padding(.horizontal, 15)
-//                    .padding(.vertical, 5)
-//                    .background(Color.yellow)
-//                    .foregroundColor(.white)
-//                    .cornerRadius(20)
-//            }
-//            )
-                                
-                
-        }
-    }
-    
-//    func getProductForSubscrible() async {
-//        do {
-//            let productIdentifiers = ["aisleepstory_month", "aisleepstory_year"]
-//            let appProducts = try await Product.products(for: productIdentifiers)
-//            print("appProducts", appProducts);
-//            let product: Product = appProducts.first!;
-//            do {
-//                let purchaseResult = try await product.purchase();
-//                print("purchaseResult:", purchaseResult)
-//            } catch {}
-//        
-//        } catch {}
-//        
-//    }
-    
+	@ObservedObject var viewModel: XBMSynthViewModel
+	@State private var selectedVoice: AVSpeechSynthesisVoice
+	init(viewModel: XBMSynthViewModel = XBMSynthViewModel(), selectedVoice: AVSpeechSynthesisVoice = AVSpeechSynthesisVoice(identifier: "com.apple.voice.compact.en-US.Samantha")!) {
+		self.viewModel = viewModel
+		self.selectedVoice = selectedVoice
+	}
+	var body: some View {
+		@State var isListVisible = false
+		
+		NavigationView {
+			
+			VStack {
+				GeometryReader { geometry in
+					ZStack {
+						Image("home_bg") // 替换为您的图像名称
+							.resizable()
+							.aspectRatio(contentMode: .fill)
+							.frame(width: geometry.size.width, height: geometry.size.height)
+							.clipped()
+						
+						VStack {
+							SpeakWordsList(viewModel: viewModel)
+							if !viewModel.isSpeaking {
+								NavigationLink(destination: SelectSpeakerView(selectedVoice: $selectedVoice)) {
+									Text("选择喜欢的声音")
+										.padding()
+										.background(Color.blue)
+										.foregroundColor(.white)
+										.cornerRadius(10)
+										.padding(.bottom, 20)
+									
+								}
+							}
+							if viewModel.speechTexts.count > 0 && viewModel.speakLocation == viewModel.speechTexts.count {
+								Button {
+									viewModel.reStartSpeak(voice: selectedVoice)
+								} label: {
+									Text("重听")
+										.foregroundColor(.white)
+										.font(.headline)
+										.padding()
+										.background(.blue)
+										.cornerRadius(8)
+								}
+							}
+							SpeakButton(viewModel: viewModel, selectedVoice: $selectedVoice) // 设置按钮与底部距离为 20 点
+						}
+					}
+				}
+				.edgesIgnoringSafeArea(.all)
+			}
+			.alert(isPresented: $viewModel.showUpdate, content: {
+				Alert(
+					title: Text("提示"),
+					message: Text(viewModel.errorMessage),
+					primaryButton: .default(Text("OK")) {
+						// 处理点击“OK”按钮的操作
+						let appStoreURLString = "https://apps.apple.com/app/6467557832"
+						
+						if let appStoreURL = URL(string: appStoreURLString) {
+							UIApplication.shared.open(appStoreURL, options: [:]) { success in
+								if success {
+									//                                    print("Successfully opened App Store")
+								} else {
+									//                                    print("Failed to open App Store")
+								}
+							}
+						}
+					},
+					secondaryButton: .cancel()
+				)
+			})
+			
+		}
+	}
 }
+    
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        XBMSpeechStoryView()
+		XBMSpeechStoryView()
     }
 }
 
@@ -129,15 +100,22 @@ struct SpeakWordsList: View {
 
     var body: some View {
         ScrollViewReader { scrollView in
-            List(viewModel.speechTexts, id: \.self) { speechText in
+            List(viewModel.speechTexts, id: \.self) { (speechText) in
                 Text(speechText.content)
-                    .foregroundColor((viewModel.willSpeakItem.content == speechText.content) ? .red : .white)
+					.foregroundColor((viewModel.willSpeakItem.content == speechText.content) ? .purple : .white)
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
                     .id(viewModel.speechTexts.firstIndex(of: speechText))
+					.padding(10)
+					.background(
+						viewModel.willSpeakItem.content == speechText.content
+						? AnyView(BlurView(style: .regular))
+						: AnyView(Color.clear)
+					)
+					.cornerRadius(10)
+				
             }
             .scrollContentBackground(.hidden)
-            .background(.clear)
             .padding(.top, 20)
             .onReceive(viewModel.$speakLocation) { index in
                 withAnimation {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -78,6 +78,20 @@
 		A8AA957558D433D14EB2993B /* Pods-AISleepStory.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AISleepStory.debug.xcconfig"; path = "Target Support Files/Pods-AISleepStory/Pods-AISleepStory.debug.xcconfig"; sourceTree = "<group>"; };
 		B14137DF5329BF6B7C4EE7C4 /* Pods_AISleepStoryTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AISleepStoryTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		07E877152C394EFE00B90261 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				BlurView.swift,
+			);
+			target = 0754B8EC2AAC744400C8787D /* AISleepStory */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		07E877112C394EB700B90261 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (07E877152C394EFE00B90261 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		0754B8EA2AAC744400C8787D /* Frameworks */ = {
@@ -211,6 +225,7 @@
 		076E34712AB5FAEA00C70204 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				07E877112C394EB700B90261 /* Components */,
 				076E34772AB6E47F00C70204 /* Net */,
 				076E34722AB5FAEF00C70204 /* Extension */,
 			);
