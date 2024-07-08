@@ -6,7 +6,7 @@ on:
 jobs:
   deploy:
     name: Build and upload TF
-    runs-on: macos-latest-xlarge
+    runs-on: macos-latest
 
     steps:
       - name: Checkout
