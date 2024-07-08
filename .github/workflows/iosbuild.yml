@@ -1,0 +1,23 @@
+name: iOS CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7 # Specify the Ruby version if your project has specific requirements
+
+    - name: Install CocoaPods
+      run: sudo gem install cocoapods
+
+    - name: Install Dependencies
+      run: pod install
