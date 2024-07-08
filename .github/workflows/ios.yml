@@ -16,6 +16,10 @@ jobs:
         with:
           ruby-version: 3.2.1
           bundler-cache: true
+      - name: Install CocoaPods
+        run: sudo gem install cocoapods
+      - name: Install Dependencies
+        run: pod install
       - name: Decode signing certificate into a file
         env:
           CERTIFICATE_BASE64: ${{ secrets.IOS_DIST_SIGNING_KEY }}
