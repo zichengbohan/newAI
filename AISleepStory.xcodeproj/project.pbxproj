@@ -89,10 +89,6 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		07E877112C394EB700B90261 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (07E877152C394EFE00B90261 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
 		0754B8EA2AAC744400C8787D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
