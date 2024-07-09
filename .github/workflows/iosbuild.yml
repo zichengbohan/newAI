@@ -15,9 +15,9 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.1.6 # Specify the Ruby version if your project has specific requirements
-
+    - name: uninstall gem alx
+      run: gem uninstall -aIx
     - name: Install CocoaPods
       run: sudo gem install cocoapods
-
     - name: Install Dependencies
       run: pod install
